@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlipShop - E-commerce Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🛍️ FlipShop</h1>
+            </div>
+            <div class="navbar-search">
+                <input type="text" id="searchInput" placeholder="Search products...">
+                <button id="searchBtn">Search</button>
+            </div>
+            <div class="navbar-links">
+                <a href="#" id="categoryLink">Categories</a>
+                <a href="#" id="cartLink">🛒 Cart <span id="cartCount" class="cart-badge">0</span></a>
+                <a href="#" id="accountLink">👤 Account</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Categories Section -->
+    <div class="categories-section">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div id="categoriesContainer" class="categories-grid">
+                <!-- Categories will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <div class="filter-section">
+                <h3>Filters</h3>
+                
+                <div class="filter-group">
+                    <label for="priceRange">Price Range</label>
+                    <input type="range" id="priceRange" min="0" max="10000" value="10000">
+                    <div class="price-display">
+                        <span>₹0</span> - <span id="priceValue">₹10000</span>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="ratingFilter">Rating</label>
+                    <select id="ratingFilter">
+                        <option value="">All Ratings</option>
+                        <option value="4">★ 4 & above</option>
+                        <option value="3">★ 3 & above</option>
+                        <option value="2">★ 2 & above</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortBy">Sort By</label>
+                    <select id="sortBy">
+                        <option value="popular">Most Popular</option>
+                        <option value="low-to-high">Price: Low to High</option>
+                        <option value="high-to-low">Price: High to Low</option>
+                        <option value="newest">Newest</option>
+                    </select>
+                </div>
+
+                <button id="applyFilters" class="btn-primary">Apply Filters</button>
+            </div>
+        </aside>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div id="productsContainer" class="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Welcome to FlipShop</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginUsername">Username</label>
+                    <input type="text" id="loginUsername" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create Account</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regUsername">Username</label>
+                    <input type="text" id="regUsername" placeholder="Choose username" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" placeholder="Enter full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" placeholder="Create password" required>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+                <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <div class="product-detail" id="productDetail">
+                <!-- Product details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <h2>Shopping Cart</h2>
+            <div id="cartContainer" class="cart-container">
+                <!-- Cart items will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkoutForm">
+                <div class="checkout-sections">
+                    <div class="checkout-section">
+                        <h3>Shipping Address</h3>
+                        <div class="form-group">
+                            <label for="chkName">Full Name</label>
+                            <input type="text" id="chkName" placeholder="Enter full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chkAddress">Address</label>
+                            <input type="text" id="chkAddress" placeholder="Enter address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chkCity">City</label>
+                            <input type="text" id="chkCity" placeholder="Enter city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chkState">State</label>
+                            <input type="text" id="chkState" placeholder="Enter state" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="chkZipcode">Zipcode</label>
+                            <input type="text" id="chkZipcode" placeholder="Enter zipcode" required>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Payment Method</h3>
+                        <div class="form-group">
+                            <input type="radio" id="paymentCard" name="payment" value="card" checked>
+                            <label for="paymentCard">Credit/Debit Card</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" id="paymentUPI" name="payment" value="upi">
+                            <label for="paymentUPI">UPI</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="radio" id="paymentCOD" name="payment" value="cod">
+                            <label for="paymentCOD">Cash on Delivery</label>
+                        </div>
+                    </div>
+
+                    <div class="checkout-section">
+                        <h3>Order Summary</h3>
+                        <div id="orderSummary" class="order-summary">
+                            <!-- Order summary will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary btn-large">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close">&times;</span>
+            <h2>My Account</h2>
+            <div id="profileTabs" class="profile-tabs">
+                <button class="tab-btn active" data-tab="profile-info">Profile Info</button>
+                <button class="tab-btn" data-tab="my-orders">My Orders</button>
+            </div>
+            <div id="profileInfo" class="tab-content active">
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label for="profileName">Full Name</label>
+                        <input type="text" id="profileName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="profilePhone">Phone</label>
+                        <input type="tel" id="profilePhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileAddress">Address</label>
+                        <input type="text" id="profileAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileCity">City</label>
+                        <input type="text" id="profileCity">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileState">State</label>
+                        <input type="text" id="profileState">
+                    </div>
+                    <div class="form-group">
+                        <label for="profileZipcode">Zipcode</label>
+                        <input type="text" id="profileZipcode">
+                    </div>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                    <button type="button" class="btn-secondary" id="logoutBtn">Logout</button>
+                </form>
+            </div>
+            <div id="myOrders" class="tab-content">
+                <div id="ordersContainer" class="orders-container">
+                    <!-- Orders will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
